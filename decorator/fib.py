@@ -17,7 +17,7 @@ def fibIter(n):
   fib = 1
   for num in range(2, N):
     fibPrev, fib = fib, fib + fibPrev
-    return fib
+  return fib
 
 end_time = time.time()
 

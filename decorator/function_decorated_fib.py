@@ -1,7 +1,12 @@
+"""
+下一个：func_attrs.py
+"""
+
 import time
 
-
+# 闭包，内部作用域对外部作用域的内容进行引用
 def profiling_decorator(f):
+  # wrapped_f函数可以使用传给profiling_decorator的参数：f
   def wrapped_f(n):
     start_time = time.time()
     result = f(n)
@@ -11,6 +16,7 @@ def profiling_decorator(f):
   return wrapped_f
 
 
+# fib = profiling_decorator(fib)
 @profiling_decorator
 def fib(n):
   print("Inside fib")

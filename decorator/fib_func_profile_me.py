@@ -6,6 +6,8 @@ import time
 不足：
 you must pre-define the parameters you want applied to
 the timed function(这种方法确实有一些限制，因为您必须预先定义要应用于定时函数的参数。)
+
+下一个：base_profiled_fib.py
 """
 
 def fib(n):

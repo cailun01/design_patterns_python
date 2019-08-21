@@ -1,3 +1,6 @@
+"""
+我们只希望对要做profile的函数做个标记。接着不用去向调用profile函数。
+"""
 import time
 
 def fib(n):

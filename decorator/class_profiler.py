@@ -1,3 +1,16 @@
+"""
+如果我们想装饰类的多个成员函数，最直接的办法，是把装饰器放在每个函数前：
+class DoMathStuff(object):
+  @profiling_decorator
+  def fib(self):
+    ...
+  
+  @profiling_decorator
+  def factorial(self):
+    ...
+但是上面的做法违反了DRY原则(Don’t Repeat Yourself)。
+"""
+
 import time
 from functools import wraps
 
@@ -18,6 +31,7 @@ def profile_all_class_methods(Cls):
   class ProfiledClass(object):
     def __init__(self, *args, **kwargs):
       self.inst = Cls(*args, **kwargs)
+    
     def __getattribute__(self, s):
       try:
         x = super(ProfiledClass, self).__getattribute__(s)
@@ -26,7 +40,18 @@ def profile_all_class_methods(Cls):
       else:
         x = self.inst.__getattribute__(s)
         if type(x) == type(self.__init__):
-          return profiling_wrapper(x)
+          return profiling_wrapper(x) # profiling_wrapper是装饰器
         else:
           return x
   return ProfiledClass
+
+"""
+@profile_all_class_methods
+class DoMathStuff(object):
+  def fib(self):
+    ...
+
+  @profiling_decorator
+  def factorial(self):
+    ...
+"""

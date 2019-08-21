@@ -1,10 +1,16 @@
+"""
+function_decorated_fib.py中使用的wrapper函数会改变函数的
+__name__ 和 __doc__属性。functools的wraps禁止wrapper函数改变被装饰函数的__name__ 和 __doc__。
+
+如果我们想设置时间的单位(s, ms等)，需要使用带参数的装饰器。
+"""
 from functools import wraps
 import time
-"""
-"""
-def profiling_decorator_with_unit(unit):
+
+# profiling_decorator_with_unit是带参数的装饰器。
+def profiling_decorator_with_unit(unit="seconds"):
   def profiling_decorator(f):
-    @wraps(f)
+    @wraps(f) # 禁止wrapper函数改变被装饰函数的__name__ 和 __doc__
     def wrap_f(n):
       start_time = time.time()
       result = f(n)
@@ -18,7 +24,8 @@ def profiling_decorator_with_unit(unit):
     return wrap_f
   return profiling_decorator
 
-@profiling_decorator_with_unit('seconds')
+
+@profiling_decorator_with_unit("seconds")
 def fib(n):
   print("Inside fib")
   if n < 2:
